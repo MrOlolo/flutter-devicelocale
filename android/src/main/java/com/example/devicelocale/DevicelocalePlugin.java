@@ -60,6 +60,9 @@ public class DevicelocalePlugin implements MethodCallHandler, FlutterPlugin {
       case "currentLocale":
         result.success(getCurrentLocale());
         break;
+      case "currentISO3Language":
+        result.success(getCurrentLocale());
+        break;
       default:
         result.notImplemented();
     }
@@ -67,6 +70,14 @@ public class DevicelocalePlugin implements MethodCallHandler, FlutterPlugin {
 
   private String getCurrentLocale() {
     return Locale.getDefault().toString();
+  }
+
+  private String getCurrentISO3Locale(){
+    try {
+      return Locale.getDefault().getISO3Language();
+    } catch (Exception e) {
+      return "eng";
+    }
   }
 
   private List<String> getPreferredLanguages() {

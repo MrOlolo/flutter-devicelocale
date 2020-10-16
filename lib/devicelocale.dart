@@ -55,4 +55,12 @@ class Devicelocale {
     final String locale = await _channel.invokeMethod('currentLocale');
     return _getAsLocale(locale);
   }
+
+  /// ONLY FOR ANDROID
+  /// Returns a [String] of the currently set DEVICE language at ISO 639-2 
+  /// (e.g. eng)
+  static Future<String> get currentISO3Language async {
+    final String locale = await _channel.invokeMethod('currentISO3Language');
+    return locale;
+  }
 }
