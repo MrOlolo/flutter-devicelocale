@@ -41,14 +41,13 @@ public class DevicelocalePlugin implements MethodCallHandler, FlutterPlugin {
     applicationContext = null;
     methodChannel.setMethodCallHandler(null);
     methodChannel = null;
-  }  
+  }
 
   private void onAttachedToEngine(Context applicationContext, BinaryMessenger messenger) {
     this.applicationContext = applicationContext;
     methodChannel = new MethodChannel(messenger, "uk.spiralarm.flutter/devicelocale");
     methodChannel.setMethodCallHandler(this);
   }
-
 
   @Override
   public void onMethodCall(MethodCall call, @NonNull Result result) {
@@ -61,7 +60,7 @@ public class DevicelocalePlugin implements MethodCallHandler, FlutterPlugin {
         result.success(getCurrentLocale());
         break;
       case "currentISO3Language":
-        result.success(getCurrentLocale());
+        result.success(getCurrentISO3Locale());
         break;
       default:
         result.notImplemented();
@@ -72,7 +71,7 @@ public class DevicelocalePlugin implements MethodCallHandler, FlutterPlugin {
     return Locale.getDefault().toString();
   }
 
-  private String getCurrentISO3Locale(){
+  private String getCurrentISO3Locale() {
     try {
       return Locale.getDefault().getISO3Language();
     } catch (Exception e) {
